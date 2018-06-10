@@ -1,0 +1,150 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*----------------------------
+    General
+-----------------------------*/
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    padding-top: 100px;
+    padding-bottom: 120px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.video-fillwidth video {
+    width: 100%;
+}
+
+ul.grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul.grid li {
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    font-size: 13px;
+}
+
+ul.grid li a {
+    display: block;
+    text-decoration: none;
+    width: 100%;
+}
+
+.grid-desc {
+    line-height: 18px;
+}
+
+.grid-meta {
+    display: block;
+}
+
+.carousel li {
+    font-size: 13px;
+}
+
+.carousel li a {
+    text-decoration: none;
+}
+
+.carousel li .video-title {
+    display: block;
+}
+
+#category1 .carousel .badge {
+    display: none;
+}
+
+.flex-direction-nav a {
+    height: 50px;
+}
+
+.row-category {
+    margin-top: 20px;
+}
+
+.loading:after {
+    content: "";
+    background: #ffffffaa url(../img/loading.gif) no-repeat center center;
+    min-width: 31px;
+    min-height: 31px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.video-item .title {
+    margin: 0;
+}
+
+.video-item .thumb-box {
+    border-radius: 3px;
+    padding: 3px;
+    margin: 0 10px 5px 0;
+    width: 160px;
+    height: 90px;
+    display: block;
+    overflow: hidden;
+    position: relative;
+    float: left;
+    border: 1px solid #cdd2d5;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+}
+
+.video-item .desc {
+    line-height: 18px;
+}
+
+.video-item .meta {
+    display: block;
+}
+
+.video-item .badge {
+    font-size: 85%;
+}
+
+.video-item [boa-href] {
+    cursor: pointer;
+}
+
+#search-result {
+    position: relative;
+}
+
+#search-result .video-item::after {
+    content: "";
+    clear: both;
+    display: block;
+}
+
+#search-result .video-item {
+    list-style: none;
+    margin: 10px 0;
+    font-size: 13px;
+}
+
+.audio-item-full audio {
+    width: 99%;
+}
+
+.item-full h5 {
+    width: 99%;
+}
+
+.item-full p {
+    width: 99%;
+}

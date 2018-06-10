@@ -1,0 +1,55 @@
+/**
+// This file is part of BoA
+//
+// BoA is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// BoA is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with BoA.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/*
+ * jQuery BoA v1.0.0
+ * Copyright 2018 David Herney
+ */
+
+.boasearch-box {
+    position: relative;
+}
+
+.boasearch-suggestions {
+    position: absolute;
+    background-color: #fff;
+    right: 0;
+    top: 35px;
+    padding: 10px;
+    max-width: 400px;
+    overflow: auto;
+    max-height: 500px;
+    box-shadow: 0 10px 10px 0 #888;
+    border-radius: 10px;
+}
+
+.boasearch-suggestions > li {
+    list-style: none;
+    white-space: nowrap;
+    border-bottom: 1px solid #eee;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.boasearch-suggestions > li:hover,
+.boasearch-suggestions > li.current {
+    background-color: #eee;
+}
+
+.boasearch-suggestions > li > em {
+    background-color: yellow;
+}

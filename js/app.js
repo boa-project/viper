@@ -31,6 +31,7 @@ dhbgApp.start = function() {
         $('#search-result').removeClass('col-12').addClass('col-sm-4');
         $('#show-one').addClass('col-sm-8');
         $('#show-one').empty();
+        $("html, body").animate({ scrollTop: 0 }, 500);
 
         data.finaluri = boautils.getFinalUri(data);
 

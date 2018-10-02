@@ -45,16 +45,35 @@ dhbgApp.start = function() {
 
         var $item = $tpl.tmpl(data);
         $('#show-one').append($item);
+
+        $item.find('[boa-action]').on('click', function() {
+            var $this = $(this);
+            var $parent = $($this.parents('.item-full')[0]);
+            var action = $this.attr('boa-action');
+
+            if (action == 'like' || action == 'dislike') {
+
+                var params = action == 'like' ? {} : { value: 0 };
+
+                $parent.find('.likegroup .active').removeClass('active');
+
+                $.post($parent.attr('boa-about') + '/scores', params, function(data) {})
+                .done(function() {
+                    $this.addClass('active');
+                });
+
+            }
+            else if (action == 'open') {
+                window.open(data.finaluri, '_blank');
+            }
+        });
     };
 
     var $boasearch = $('#boa-search').boasearch({
 //        apiuri: 'http://localhost/viper/test/data',
         apiuri: 'http://localhost/boaapi',
         catalogues: [
-//            { name: 'Catalogo de casas', key: 'casas'},
-//            { name: 'Vida en pareja', key: 'parejas'}
-            { name: 'Banco principal', key: 'banco-principal'},
-            //{ name: 'Cleo - UdeA', key: 'cleo'}
+            { name: 'Banco principal', key: 'banco-principal'}
         ],
         filters: [
             { meta: 'metadata.technical.format', value: ['video', 'audio'] }
@@ -63,7 +82,7 @@ dhbgApp.start = function() {
         debug: true,
         results: {
             target: '#search-result',
-            template: '#tpl-video-item'
+            template: '#tpl-item'
         },
         events: {
             onstart: function(more) {
@@ -87,9 +106,10 @@ dhbgApp.start = function() {
                     $('#search-result > button').hide();
                 }
 
-                var $tpl = $('#tpl-video-item');
+                var $tpl = $('#tpl-item');
 
                 $.each(data, function(k, item) {
+
                     if (item.manifest.conexion_type == 'external') {
                         item.finaluri = item.manifest.url;
                     }

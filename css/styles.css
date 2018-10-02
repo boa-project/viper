@@ -85,11 +85,11 @@ ul.grid li a {
     left: 0;
 }
 
-.video-item .title {
+.one-item .title {
     margin: 0;
 }
 
-.video-item .thumb-box {
+.one-item .thumb-box {
     border-radius: 3px;
     padding: 3px;
     margin: 0 10px 5px 0;
@@ -105,19 +105,19 @@ ul.grid li a {
     background-position: center center;
 }
 
-.video-item .desc {
+.one-item .desc {
     line-height: 18px;
 }
 
-.video-item .meta {
+.one-item .meta {
     display: block;
 }
 
-.video-item .badge {
+.one-item .badge {
     font-size: 85%;
 }
 
-.video-item [boa-href] {
+.one-item [boa-href] {
     cursor: pointer;
 }
 
@@ -125,13 +125,13 @@ ul.grid li a {
     position: relative;
 }
 
-#search-result .video-item::after {
+#search-result .one-item::after {
     content: "";
     clear: both;
     display: block;
 }
 
-#search-result .video-item {
+#search-result .one-item {
     list-style: none;
     margin: 10px 0;
     font-size: 13px;

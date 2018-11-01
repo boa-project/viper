@@ -53,7 +53,7 @@
 
 <!-- Templates -->
 
-<script id="tpl-item" type="text/x-jQuery-tmpl">
+<script id="boa-tpl-item" type="text/x-jQuery-tmpl">
     <div class="one-item">
         <span class="thumb-box" boa-href="${about}" title="${metadata.general.title.none}" style="background-image: url(${about}.img?s=128)"></span>
         <h5 class="title" boa-href="${about}">${metadata.general.title.none}</h5>
@@ -66,7 +66,7 @@
     </div>
 </script>
 
-<script id="tpl-video-item-full" type="text/x-jQuery-tmpl">
+<script id="boa-tpl-video-item-full" type="text/x-jQuery-tmpl">
     <div class="video-item-full item-full" boa-about="${about}">
         <div class="card-body video-fillwidth">
             <video controls poster="${about}.img">
@@ -113,7 +113,7 @@
     </div>
 </script>
 
-<script id="tpl-audio-item-full" type="text/x-jQuery-tmpl">
+<script id="boa-tpl-audio-item-full" type="text/x-jQuery-tmpl">
     <div class="audio-item-full item-full" boa-about="${about}">
         <div class="card-body video-fillwidth">
             <img src="${about}.img?s=256" title="${metadata.general.title.none}" />
@@ -161,7 +161,7 @@
     </div>
 </script>
 
-<script id="tpl-error-item" type="text/x-jQuery-tmpl">
+<script id="boa-tpl-error-item" type="text/x-jQuery-tmpl">
     <div class="alert alert-dismissible alert-danger">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         <p>${message}</p>
@@ -169,7 +169,7 @@
     </div>
 </script>
 
-<script id="tpl-comments-item" type="text/x-jQuery-tmpl">
+<script id="boa-tpl-comments-item" type="text/x-jQuery-tmpl">
     <span class="list-group-item list-group-item-action flex-column align-items-start w-100">
         <div class="d-flex w-100">
             <h5 class="mb-1">${name}</h5>

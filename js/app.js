@@ -37,10 +37,10 @@ dhbgApp.start = function() {
 
         var $tpl;
         if (data.metadata.technical.format.indexOf('audio') > -1) {
-            $tpl = $('#tpl-audio-item-full');
+            $tpl = $('#boa-tpl-audio-item-full');
         }
         else {
-            $tpl = $('#tpl-video-item-full');
+            $tpl = $('#boa-tpl-video-item-full');
         }
 
         var $item = $tpl.tmpl(data);
@@ -124,7 +124,7 @@ dhbgApp.start = function() {
             $msg.hide();
             $list.show();
             $.each(comments, function(i, comment) {
-                var $tplcomment = $('#tpl-comments-item');
+                var $tplcomment = $('#boa-tpl-comments-item');
                 var ago = Math.floor(Date.now() / 1000) - Number(comment.updated_at);
 
                 if (ago <= 0) {
@@ -168,7 +168,7 @@ dhbgApp.start = function() {
         debug: true,
         results: {
             target: '#search-result',
-            template: '#tpl-item'
+            template: '#boa-tpl-item'
         },
         events: {
             onstart: function(more) {
@@ -179,7 +179,7 @@ dhbgApp.start = function() {
                     $('#search-result > .content').empty();
                 }
             },
-            onfound: function(data) {
+            onfound: function(data, start) {
 
                 dhbgApp.debug('Encontrados: ' + data.length + ' resultados');
 
@@ -192,7 +192,22 @@ dhbgApp.start = function() {
                     $('#search-result > button').hide();
                 }
 
-                var $tpl = $('#tpl-item');
+                if (start == 0) {
+                    $('#show-one').empty();
+                    $('#search-result').addClass('col-12').removeClass('col-sm-4');
+                    $('#show-one').removeClass('col-sm-8');
+                }
+
+                if ((!data || data.length === 0) && start == 0) {
+                    $target.empty();
+
+                    var $tpl = $('#boa-tpl-error-item');
+                    var $node = $tpl.tmpl( { "message" : "No se encontraron resultados" } );
+                    $target.append($node);
+                    return;
+                }
+
+                var $tpl = $('#boa-tpl-item');
 
                 $.each(data, function(k, item) {
 
@@ -222,7 +237,7 @@ dhbgApp.start = function() {
                 var $target = $('#errors-box');
                 $target.empty();
 
-                var $tpl = $('#tpl-error-item');
+                var $tpl = $('#boa-tpl-error-item');
                 var $node = $tpl.tmpl(error);
                 $target.append($node);
 

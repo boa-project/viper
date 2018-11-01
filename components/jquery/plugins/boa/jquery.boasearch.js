@@ -243,7 +243,7 @@
 
             printResultSearch: function(data) {
                 if (typeof($boasearch.conf.events.onfound) == 'function') {
-                    $boasearch.conf.events.onfound(data);
+                    $boasearch.conf.events.onfound(data, startRecord);
                 }
                 else {
                     if ($boasearch.conf.results.target) {

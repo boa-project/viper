@@ -127,7 +127,10 @@ dhbgApp.start = function() {
                 var $tplcomment = $('#tpl-comments-item');
                 var ago = Math.floor(Date.now() / 1000) - Number(comment.updated_at);
 
-                if (ago <= 60) {
+                if (ago <= 0) {
+                    ago = ' pocos segundos';
+                }
+                else if (ago <= 60) {
                     ago = ago + ' segundos';
                 }
                 else if (ago <= 60 * 60) {

@@ -27,7 +27,7 @@ dhbgApp.start = function() {
         slideshow: false
     });
 
-    var showOneRecourse = function (data) {
+    var showOneRecourse = function(data) {
         $('#search-result').removeClass('col-12').addClass('col-sm-4');
         $('#show-one').addClass('col-sm-8');
         $('#show-one').empty();
@@ -45,6 +45,41 @@ dhbgApp.start = function() {
 
         var $item = $tpl.tmpl(data);
         $('#show-one').append($item);
+
+        loadComments(data.about);
+
+        var $submitcomments = $('#show-one .comments-form [type="submit"]');
+        var $namecomments = $('#show-one .comments-form [name="name"]');
+        var $contentcomments = $('#show-one .comments-form [name="content"]');
+
+        $submitcomments.attr('disabled', true);
+
+        var onchangevalid = function() {
+            if ($.trim($namecomments) == '' || $.trim($contentcomments.val()) == '') {
+                $submitcomments.attr('disabled', true);
+            }
+            else {
+                $submitcomments.attr('disabled', false);
+            }
+        };
+
+        $namecomments.on('input propertychange paste', onchangevalid);
+        $contentcomments.on('input propertychange paste', onchangevalid);
+
+        $submitcomments.on('click', function() {
+            var commentdata = {
+                "name": $.trim($namecomments.val()),
+                "content": $.trim($contentcomments.val())
+            };
+
+            $.post(data.about + '/comments', commentdata, function() {
+                $namecomments.val('');
+                $contentcomments.val('');
+                loadComments(data.about);
+            });
+
+            return false;
+        });
 
         $item.find('[boa-action]').on('click', function() {
             var $this = $(this);
@@ -67,6 +102,54 @@ dhbgApp.start = function() {
                 window.open(data.finaluri, '_blank');
             }
         });
+    };
+
+    var loadComments = function(baseuri) {
+        $.get(baseuri + '/comments', function(comments) {
+            showComments(comments);
+        });
+    };
+
+    var showComments = function(comments) {
+        var $box = $('#show-one .comments-box');
+        var $list = $box.find('.comments-list');
+        var $msg = $box.find('.alert');
+        $list.empty();
+
+        if (comments.length == 0) {
+            $msg.show().html('Aún no hay comentarios.');
+            $list.hide();
+        }
+        else {
+            $msg.hide();
+            $list.show();
+            $.each(comments, function(i, comment) {
+                var $tplcomment = $('#tpl-comments-item');
+                var ago = Math.floor(Date.now() / 1000) - Number(comment.updated_at);
+
+                if (ago <= 60) {
+                    ago = ago + ' segundos';
+                }
+                else if (ago <= 60 * 60) {
+                    ago = Math.floor(ago / 60) + ' minutos';
+                }
+                else if (ago <= 60 * 60 * 24) {
+                    ago = Math.floor(ago / (60 * 60)) + ' horas';
+                }
+                else {
+                    ago = Math.floor(ago / (60 * 60 * 24)) + ' dias';
+                }
+
+                var datacomment = {
+                    "name": comment.owner,
+                    "ago": 'Hace ' + ago,
+                    "content": comment.content
+                };
+
+                var $item = $tplcomment.tmpl(datacomment);
+                $list.append($item);
+            });
+        }
     };
 
     var $boasearch = $('#boa-search').boasearch({

@@ -102,6 +102,22 @@ dhbgApp.start = function() {
                 window.open(data.finaluri, '_blank');
             }
         });
+
+        if (data.manifest.alternate) {
+            forEach(function(element) {
+                var $one = $('<button type="button" class="btn btn-secondary" boa-action="alternate" boa-item="' + element + '">' + element + '</button>');
+
+                $one.on('click', function() {
+                    var $alt = $(this);
+                    var url = $item.find('video source').attr('src');
+                    url = url.replace('/!/', '/!/.alternate/');
+                    url += '/' + $alt.attr('boa-item');
+                    $item.find('video source').attr('src', url);
+                });
+
+                $item.find('.alternates').append($one);
+            });
+        }
     };
 
     var loadComments = function(baseuri) {

@@ -103,16 +103,22 @@ dhbgApp.start = function() {
             }
         });
 
-        if (data.manifest.alternate) {
-            forEach(function(element) {
-                var $one = $('<button type="button" class="btn btn-secondary" boa-action="alternate" boa-item="' + element + '">' + element + '</button>');
+        // Alternates only for videos... for now.
+        if (data.manifest.alternate && data.finaluri.indexOf('.mp4') > 0) {
+            data.manifest.alternate.forEach(function(element) {
+                if (element.indexOf('.mp4') < 0) {
+                    return;
+                }
+
+                var $one = $('<button type="button" class="btn btn-link" boa-action="alternate" boa-item="' + element + '">' + element.replace('.mp4', '') + '</button>');
 
                 $one.on('click', function() {
                     var $alt = $(this);
-                    var url = $item.find('video source').attr('src');
+                    var url = data.finaluri;
                     url = url.replace('/!/', '/!/.alternate/');
                     url += '/' + $alt.attr('boa-item');
                     $item.find('video source').attr('src', url);
+                    $item.find('video')[0].load();
                 });
 
                 $item.find('.alternates').append($one);
